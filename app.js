@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose'); // don't forget our dependency!
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var talent = require('./routes/talent');
+
+var test_data = require('./test_data/talent');
 
 var app = express();
 
@@ -24,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/talent', talent);
 
 /** ---------- MONGOOSE CONNECTION HANDLING ---------- **/
 var dbURI = 'mongodb://localhost:27017/rando';
@@ -45,6 +47,9 @@ mongoose.connection.on('error',function (err) {
 mongoose.connection.on('disconnected', function () {
   console.log('Mongoose default connection disconnected');
 });
+
+/** ---------- CREATE TEST DATA FOR DATABASE ---------- **/
+test_data.createTestData();
 
 /** ---------- EXPRESS ERROR HANDLING ---------- **/
 // catch 404 and forward to error handler

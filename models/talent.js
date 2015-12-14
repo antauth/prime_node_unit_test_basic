@@ -26,6 +26,21 @@ var talentSchema = new Schema({
   current: String
 });
 
+// Example of adding a method to our model
+/**
+ * Check if the min value for a given wage_req is less than the max range.
+ * If not, switch values.
+ */
+talentSchema.methods.normalizeWageRange = function() {
+  this.wage_req.forEach(function(element, index, array) {
+    if(element.min > element.max) {
+      var temp = element.min;
+      element.min = element.max;
+      element.max = temp;
+    }
+  });
+}
+
 // Step 2 - Create the model
 var Talent = mongoose.model('Talent', talentSchema);
 
