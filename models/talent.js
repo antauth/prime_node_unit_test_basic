@@ -10,7 +10,7 @@ var Schema = mongoose.Schema; // mongoose schema for defining our models
 // Step 1 - Create the schema
 var talentSchema = new Schema({
   talent_id: Number,
-  name: {type:String, required:true},
+  name: {type:String, required: true},
   address: String,
   skills: [String],
   wage_req: [{
