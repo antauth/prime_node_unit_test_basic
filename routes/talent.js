@@ -1,10 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var Talent = require('../models/talent');
+var TalentService = require('../services/talentService');
 
 /* GET all talent. */
 router.get('/', function(req, res, next) {
   // TODO: Find all talent documents and send them back as an array of objects
+  TalentService.findAll(function(data){
+    res.json(data);
+  });
 });
 
 /* Add a talent record. */
